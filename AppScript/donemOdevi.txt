@@ -1,0 +1,26 @@
+function Donem_Odevi() {
+const gs = SpreadsheetApp.getActiveSpreadsheet();
+const anaSayfa = gs.getSheetByName("Master");
+const bolgeler = anaSayfa.getRange(2,6,anaSayfa.getLastRow()1,1).getValues().map(bolge
+=>bolge[0]);
+const uniqueBolge = [...new Set(bolgeler) ] ;
+const varOlanBolgeler = gs.getSheets().map(bolge=>bolge.getName());
+const sayfalar = gs.getSheets();
+for(i=0;i<sayfalar.length;i++){
+switch(sayfalar[i].getSheetName()){
+case "Master":
+break
+default:
+gs.deleteSheet(sayfalar[i]);
+}
+}
+let ws;
+uniqueBolge.forEach(rg=>{
+if(!varOlanBolgeler.includes(rg)){
+ws = null;
+ws =gs.insertSheet();
+ws.setName(rg);
+ws.getRange("A2").setFormula(`=FILTER(Master!A1:G;Master!F1:F="${rg}")`);
+anaSayfa.getRange("A1:G1").copyTo(ws.getRange("A1:G1"));
+}
+})}
