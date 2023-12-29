@@ -1,3 +1,3 @@
 # SoftwareWorks
 
-##Genel çalışmalarımı paylaştığım alan
+Genel çalışmalarımı paylaştığım alan
